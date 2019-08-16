@@ -36,7 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 print("Y: \(point.y)");
                 print("Pressure: \(event.pressure)");
                 let loc = event.locationInWindow;
-                let str = "\(event.timestamp),\(loc.x),\(loc.y),\(event.pressure)\n";
+                let str = "\(UInt64(event.timestamp * 1000)),\(loc.x),\(loc.y),\(event.pressure)\n";
                 print(str);
                 self.udpSender?.sendPacket(str: str);
                 return nil;
