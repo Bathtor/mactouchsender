@@ -19,22 +19,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         print("setting up!");
+        var frame = self.window?.frame
+        frame?.size = NSSize(width: 505, height:323)
+        self.window?.setFrame(frame!, display: true)
         udpSender = NetSender();
-//        NSEvent.addGlobalMonitorForEvents(
-//            matching: NSEvent.EventTypeMask.leftMouseDown,
-//            handler: { (event: NSEvent) -> Void in
-//            let point = NSEvent.mouseLocation;
-//            print("X: \(point.x)");
-//            print("Y: \(point.y)");
-//        });
         udpSender?.sendPacket(str: "Test!");
         NSEvent.addLocalMonitorForEvents(
             matching: NSEvent.EventTypeMask.pressure,
             handler: { (event: NSEvent) -> NSEvent? in
-                let point = NSEvent.mouseLocation;
-                print("X: \(point.x)");
-                print("Y: \(point.y)");
-                print("Pressure: \(event.pressure)");
                 let loc = event.locationInWindow;
                 let str = "\(event.timestamp),\(loc.x),\(loc.y),\(event.pressure)\n";
                 print(str);
